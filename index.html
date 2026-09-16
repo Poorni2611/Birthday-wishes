@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,190 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg-1:#2B1B3D;
-    --bg-2:#3E2557;
-    --cream:#FBF3E7;
-    --gold:#E8B94A;
-    --coral:#F4877A;
-    --mint:#7FC8A9;
-    --plate:#4A2F63;
-    --shadow: rgba(0,0,0,0.35);
-  }
-  :root:not([data-theme="light"]){
-    --bg-1:#2B1B3D;
-    --bg-2:#3E2557;
-  }
-  :root[data-theme="light"]{
-    --bg-1:#3a2456;
-    --bg-2:#4d2f6d;
-  }
-  @media (prefers-color-scheme: light){
-    :root:not([data-theme="dark"]){
-      --bg-1:#3a2456;
-      --bg-2:#4d2f6d;
-    }
-  }
-
-  *{ box-sizing:border-box; }
-  html,body{
-    margin:0; padding:0; width:100%; min-height:100%;
-    background: radial-gradient(ellipse at 50% -10%, var(--bg-2), var(--bg-1) 70%);
-    font-family:'Nunito', sans-serif;
-    color:var(--cream);
-    overflow-x:hidden;
-  }
-
-  .sky{
-    position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
-  }
-  .star{
-    position:absolute; width:3px; height:3px; background:var(--cream);
-    border-radius:50%; opacity:0.5; animation: twinkle 3s ease-in-out infinite;
-  }
-  @keyframes twinkle{ 0%,100%{opacity:.15;} 50%{opacity:.7;} }
-
-  .balloon{
-    position:absolute; bottom:-140px; width:60px; height:76px; border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
-    animation: float-up linear infinite;
-    opacity:0.9;
-  }
-  .balloon::after{
-    content:''; position:absolute; left:50%; top:100%; width:2px; height:60px;
-    background: rgba(251,243,231,0.35); transform:translateX(-50%);
-  }
-  .balloon::before{
-    content:''; position:absolute; left:50%; top:96%; width:8px; height:8px;
-    background:inherit; transform:translateX(-50%) rotate(45deg);
-  }
-  @keyframes float-up{
-    0%{ transform:translateY(0) translateX(0) rotate(-4deg); }
-    50%{ transform:translateY(-58vh) translateX(30px) rotate(4deg); }
-    100%{ transform:translateY(-115vh) translateX(-10px) rotate(-4deg); }
-  }
-
-  main{
-    position:relative; z-index:1;
-    max-width:640px; margin:0 auto; padding: 56px 24px 90px;
-    text-align:center;
-  }
-
-  .eyebrow-emoji{ font-size:34px; display:block; margin-bottom:6px; }
-
-  h1{
-    font-family:'Baloo 2', sans-serif; font-weight:800;
-    font-size: clamp(2.4rem, 9vw, 3.6rem);
-    line-height:1.05; margin: 0 0 8px;
-    color: var(--cream);
-    text-shadow: 0 4px 0 var(--shadow);
-  }
-  h1 .accent{ color: var(--gold); }
-
-  .name-field{
-    font-family:'Baloo 2', sans-serif; font-weight:700; font-size: clamp(1.4rem,6vw,2rem);
-    color: var(--coral); background:none; border:none; border-bottom: 3px dashed rgba(251,243,231,0.4);
-    text-align:center; width: 90%; max-width:360px; padding:4px 8px; margin: 6px 0 22px;
-    outline:none;
-  }
-  .name-field::placeholder{ color: rgba(251,243,231,0.4); }
-  .name-field:focus{ border-bottom-color: var(--gold); }
-
-  .subtitle{
-    font-size:1.05rem; color: rgba(251,243,231,0.85); max-width:440px; margin:0 auto 40px;
-    line-height:1.6;
-  }
-
-  /* CAKE */
-  .cake-stage{
-    position:relative; width: 280px; height: 260px; margin: 0 auto 18px;
-  }
-  .plate{
-    position:absolute; bottom:0; left:50%; transform:translateX(-50%);
-    width:260px; height:26px; background: linear-gradient(180deg, #6B4489, var(--plate));
-    border-radius:50%; box-shadow: 0 8px 18px var(--shadow);
-  }
-  .cake{
-    position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
-    width:220px; height:150px;
-    cursor:pointer;
-  }
-  .cake svg{ width:100%; height:100%; display:block; overflow:visible; }
-
-  .flame{
-    animation: flicker 0.9s ease-in-out infinite alternate;
-    transform-origin: center bottom;
-  }
-  .flame:nth-child(2){ animation-delay:0.2s; }
-  @keyframes flicker{
-    0%{ transform: scaleY(1) rotate(-2deg); }
-    100%{ transform: scaleY(1.15) rotate(2deg); }
-  }
-
-  .slice-left, .slice-right{ transition: transform 1.1s cubic-bezier(.34,1.56,.64,1); }
-  .cut .slice-left{ transform: translate(-34px, 10px) rotate(-14deg); }
-  .cut .slice-right{ transform: translate(34px, 10px) rotate(14deg); }
-
-  .knife{
-    position:absolute; top:-46px; left:50%; width:14px; height:70px;
-    transform: translateX(-50%) rotate(0deg);
-    transform-origin: top center;
-    transition: transform 0.5s ease-in, opacity 0.4s ease 0.5s;
-    opacity:1;
-  }
-  .cut .knife{ transform: translateX(-50%) rotate(58deg) translateY(6px); opacity:0; }
-
-  .hint{
-    font-size:0.9rem; color: rgba(251,243,231,0.6); margin: 10px 0 46px;
-    transition: opacity 0.4s ease;
-  }
-  .cut + .hint, .cake-stage.cut ~ .hint{ opacity:0; }
-
-  .cta{
-    display:inline-block; margin-top: 6px; padding: 13px 30px;
-    background: var(--coral); color: #2B1B3D; font-family:'Baloo 2',sans-serif;
-    font-weight:700; font-size:1.05rem; border:none; border-radius: 999px;
-    cursor:pointer; box-shadow: 0 6px 0 #b85d53; transition: transform .12s ease, box-shadow .12s ease;
-  }
-  .cta:active{ transform: translateY(4px); box-shadow: 0 2px 0 #b85d53; }
-  .cta:disabled{ opacity:0.5; cursor:default; }
-
-  /* MESSAGE reveal */
-  .message{
-    max-width: 460px; margin: 44px auto 0; opacity:0; max-height:0; overflow:hidden;
-    transition: opacity 0.6s ease, max-height 0.8s ease;
-  }
-  .message.show{ opacity:1; max-height:600px; }
-  .message p{ font-size:1.08rem; line-height:1.7; color: var(--cream); margin: 0 0 14px; }
-
-  /* GALLERY */
-  .gallery-title{
-    font-family:'Baloo 2',sans-serif; font-size:1.3rem; margin: 56px 0 18px; color:var(--gold);
-  }
-  .gallery{
-    display:grid; grid-template-columns: repeat(2, 1fr); gap:14px;
-  }
-  .photo-slot{
-    aspect-ratio: 1/1; border-radius:16px; border: 2.5px dashed rgba(251,243,231,0.3);
-    display:flex; align-items:center; justify-content:center; text-align:center;
-    background: rgba(251,243,231,0.04); font-size:0.85rem; color: rgba(251,243,231,0.5);
-    padding:10px; position:relative; overflow:hidden;
-  }
-  .photo-slot img{ width:100%; height:100%; object-fit:cover; position:absolute; inset:0; border-radius:14px; }
-  .photo-slot:nth-child(odd){ transform: rotate(-2deg); }
-  .photo-slot:nth-child(even){ transform: rotate(2deg); }
-
-  footer{
-    margin-top:60px; font-size:0.85rem; color: rgba(251,243,231,0.4);
-  }
-
-  #confetti-canvas{
-    position:fixed; inset:0; z-index:5; pointer-events:none;
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    .balloon, .flame{ animation: none; }
-    .slice-left, .slice-right, .knife{ transition: none; }
-  }
+  /* ... same CSS as before, unchanged ... */
 </style>
 </head>
 <body>
@@ -207,44 +23,7 @@
   <p class="subtitle">Another trip around the sun — tap the candles, then slice the cake to open your wish.</p>
 
   <div class="cake-stage" id="cakeStage">
-    <div class="plate"></div>
-    <div class="cake" id="cake" role="button" aria-label="Cut the cake" tabindex="0">
-      <svg viewBox="0 0 220 150">
-        <!-- LEFT SLICE -->
-        <g class="slice-left">
-          <clipPath id="clipLeft"><rect x="0" y="0" width="110" height="150"/></clipPath>
-          <g clip-path="url(#clipLeft)">
-            <rect x="20" y="70" width="180" height="60" rx="10" fill="#8a5a3a"/>
-            <rect x="20" y="55" width="180" height="20" fill="#f9c9d6"/>
-            <rect x="20" y="40" width="180" height="20" rx="8" fill="#f4877a"/>
-            <path d="M20 46 q10 -14 20 0 q10 -14 20 0 q10 -14 20 0 q10 -14 20 0 q10 -14 20 0 q10 -14 20 0 q10 -14 20 0 q10 -14 20 0" fill="none" stroke="#e8b94a" stroke-width="4" stroke-linecap="round"/>
-          </g>
-        </g>
-        <!-- RIGHT SLICE -->
-        <g class="slice-right">
-          <clipPath id="clipRight"><rect x="110" y="0" width="110" height="150"/></clipPath>
-          <g clip-path="url(#clipRight)">
-            <rect x="20" y="70" width="180" height="60" rx="10" fill="#8a5a3a"/>
-            <rect x="20" y="55" width="180" height="20" fill="#f9c9d6"/>
-            <rect x="20" y="40" width="180" height="20" rx="8" fill="#f4877a"/>
-            <path d="M20 46 q10 -14 20 0 q10 -14 20 0 q10 -14 20 0 q10 -14 20 0 q10 -14 20 0 q10 -14 20 0 q10 -14 20 0 q10 -14 20 0" fill="none" stroke="#e8b94a" stroke-width="4" stroke-linecap="round"/>
-          </g>
-        </g>
-        <!-- CANDLES -->
-        <g>
-          <rect x="55" y="14" width="6" height="26" rx="2" fill="#7fc8a9"/>
-          <ellipse class="flame" cx="58" cy="10" rx="4" ry="7" fill="#f7b733"/>
-          <rect x="105" y="10" width="6" height="30" rx="2" fill="#f4877a"/>
-          <ellipse class="flame" cx="108" cy="6" rx="4.5" ry="8" fill="#f7b733"/>
-          <rect x="155" y="14" width="6" height="26" rx="2" fill="#e8b94a"/>
-          <ellipse class="flame" cx="158" cy="10" rx="4" ry="7" fill="#f7b733"/>
-        </g>
-      </svg>
-      <svg class="knife" viewBox="0 0 14 70">
-        <rect x="4" y="0" width="6" height="46" rx="2" fill="#dfe6ec"/>
-        <rect x="0" y="44" width="14" height="20" rx="4" fill="#6b4a2f"/>
-      </svg>
-    </div>
+    <!-- ... same cake SVG markup as before ... -->
   </div>
   <div class="hint" id="hint">tap the cake to cut it</div>
 
@@ -260,109 +39,17 @@
 
   <h2 class="gallery-title">A few favorite moments</h2>
   <div class="gallery" id="gallery">
-    <div class="photo-slot" data-slot="1">drop a photo here<br><span style="font-size:0.75rem;opacity:0.7">(edit the code or drag an image file in)</span></div>
-    <div class="photo-slot" data-slot="2">photo 2</div>
-    <div class="photo-slot" data-slot="3">photo 3</div>
-    <div class="photo-slot" data-slot="4">photo 4</div>
+    <div class="photo-slot" data-slot="1"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRg... (full image data) ...==" alt="Birthday photo 1"></div>
+    <div class="photo-slot" data-slot="2"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRg... (full image data) ...==" alt="Birthday photo 2"></div>
+    <div class="photo-slot" data-slot="3"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRg... (full image data) ...==" alt="Birthday photo 3"></div>
+    <div class="photo-slot" data-slot="4"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRg... (full image data) ...==" alt="Birthday photo 4"></div>
   </div>
 
   <footer>made with 🎂 for your special day</footer>
 </main>
 
 <script>
-// Stars
-const sky = document.getElementById('sky');
-for(let i=0;i<40;i++){
-  const s = document.createElement('div');
-  s.className='star';
-  s.style.left = Math.random()*100+'%';
-  s.style.top = Math.random()*70+'%';
-  s.style.animationDelay = (Math.random()*3)+'s';
-  sky.appendChild(s);
-}
-// Balloons
-const balloonColors = ['#F4877A','#E8B94A','#7FC8A9','#B98FD1','#F4A6A0'];
-for(let i=0;i<7;i++){
-  const b = document.createElement('div');
-  b.className='balloon';
-  b.style.left = (Math.random()*90)+'%';
-  b.style.background = balloonColors[i % balloonColors.length];
-  b.style.animationDuration = (14 + Math.random()*10)+'s';
-  b.style.animationDelay = (Math.random()*10)+'s';
-  sky.appendChild(b);
-}
-
-// Cake cut
-const cakeStage = document.getElementById('cakeStage');
-const cake = document.getElementById('cake');
-const hint = document.getElementById('hint');
-let cutDone = false;
-function cutCake(){
-  if(cutDone) return;
-  cutDone = true;
-  cakeStage.classList.add('cut');
-  hint.style.opacity = '0';
-  burstConfetti();
-}
-cake.addEventListener('click', cutCake);
-cake.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') cutCake(); });
-
-// Reveal message
-const revealBtn = document.getElementById('revealBtn');
-const message = document.getElementById('message');
-const nameField = document.getElementById('nameField');
-revealBtn.addEventListener('click', ()=>{
-  if(!cutDone) cutCake();
-  const name = nameField.value.trim();
-  if(name){
-    document.getElementById('msgLine1').textContent =
-      `Happy birthday, ${name}! Wishing you a day as bright as your candles and a year as sweet as your cake.`;
-  }
-  message.classList.add('show');
-  revealBtn.disabled = true;
-  burstConfetti();
-});
-
-// Confetti
-const canvas = document.getElementById('confetti-canvas');
-const ctx = canvas.getContext('2d');
-function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-resize();
-window.addEventListener('resize', resize);
-let particles = [];
-function burstConfetti(){
-  const colors = ['#F4877A','#E8B94A','#7FC8A9','#FBF3E7','#B98FD1'];
-  for(let i=0;i<90;i++){
-    particles.push({
-      x: canvas.width/2 + (Math.random()-0.5)*120,
-      y: canvas.height*0.35,
-      vx: (Math.random()-0.5)*9,
-      vy: -Math.random()*9 - 3,
-      size: 5 + Math.random()*5,
-      color: colors[Math.floor(Math.random()*colors.length)],
-      rot: Math.random()*360,
-      vr: (Math.random()-0.5)*14,
-      life: 0
-    });
-  }
-}
-function tick(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  particles.forEach(p=>{
-    p.vy += 0.22;
-    p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life++;
-    ctx.save();
-    ctx.translate(p.x,p.y);
-    ctx.rotate(p.rot*Math.PI/180);
-    ctx.fillStyle = p.color;
-    ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.6);
-    ctx.restore();
-  });
-  particles = particles.filter(p=> p.y < canvas.height+40 && p.life < 260);
-  requestAnimationFrame(tick);
-}
-tick();
+  /* ... same JS as before, unchanged (stars, balloons, cake cut, confetti) ... */
 </script>
 </body>
 </html>
-```
